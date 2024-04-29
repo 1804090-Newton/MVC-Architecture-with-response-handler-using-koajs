@@ -5,7 +5,7 @@ exports.getAllUsers = async (ctx) => {
     const users = User.getAll();
     ctx.response.ok('All users retrieved successfully', users);
   } catch (error) {
-    ctx.response.fail('Failed to retrieve users');
+    ctx.response.internalError('Failed to retrieve users');
   }
 };
 
@@ -16,10 +16,10 @@ exports.getUserById = async (ctx) => {
     if (user) {
       ctx.response.ok('User retrieved successfully', user);
     } else {
-      ctx.response.fail('User not found');
+      ctx.response.notFound('User not found');
     }
   } catch (error) {
-    ctx.response.fail('Failed to retrieve user');
+    ctx.response.internalError('Failed to retrieve user');
   }
 };
 
@@ -27,9 +27,9 @@ exports.createUser = async (ctx) => {
   const userData = ctx.request.body;
   try {
     const newUser = User.createUser(userData);
-    ctx.response.ok('User created successfully', newUser);
+    ctx.response.created('User created successfully', newUser);
   } catch (error) {
-    ctx.response.fail('Failed to create user');
+    ctx.response.badRequest('Failed to create user');
   }
 };
 
@@ -41,10 +41,10 @@ exports.updateUser = async (ctx) => {
     if (updatedUser) {
       ctx.response.ok('User updated successfully', updatedUser);
     } else {
-      ctx.response.fail('User not found');
+      ctx.response.notFound('User not found');
     }
   } catch (error) {
-    ctx.response.fail('Failed to update user');
+    ctx.response.internalError('Failed to update user');
   }
 };
 
@@ -55,9 +55,9 @@ exports.deleteUser = async (ctx) => {
     if (deletedUser) {
       ctx.response.ok('User deleted successfully', deletedUser);
     } else {
-      ctx.response.fail('User not found');
+      ctx.response.notFound('User not found');
     }
   } catch (error) {
-    ctx.response.fail('Failed to delete user');
+    ctx.response.internalError('Failed to delete user');
   }
 };
