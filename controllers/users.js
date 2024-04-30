@@ -1,8 +1,10 @@
-const User = require('../models/User');
+
+const User = require('../services/User');
 
 exports.getAllUsers = async (ctx) => {
   try {
     const users = User.getAll();
+    console.log(users);
     ctx.response.ok('All users retrieved successfully', {...users});
   } catch (error) {
     ctx.response.internalError('Failed to retrieve users');
